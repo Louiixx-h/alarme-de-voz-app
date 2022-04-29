@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="StyleDefaultTimerPicker" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:numbersTextColor">@color/white</item>
+        <item name="android:headerBackground">@color/blue_3F51B5</item>
+        <item name="android:numbersSelectorColor">@color/blue_7986CB</item>
+        <item name="android:numbersBackgroundColor">@color/blue_3F51B5</item>
+        <item name="android:background">#00ffffff</item>
+    </style>
+
+    <style name="Widget.AlarmeDeVoz.Seekbar" parent="">
+        <item name="android:progressBackgroundTint">@color/blue_7986CB</item>
+        <item name="android:progressTint">@color/blue_3F51B5</item>
+        <item name="android:thumbTint">@color/blue_3F51B5</item>
+    </style>
+</resources>

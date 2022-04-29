@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Alarme de voz</string>
+    <string name="title">Título</string>
+    <string name="color_select">Selecione uma cor</string>
+    <string name="sound_alarm">Toque do alarme</string>
+    <string name="select_melody">Escolher melodia</string>
+    <string name="select_hour">Selecionar hora</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
+    <string name="channel_name">br.com.luishenrique.alarmedevoz</string>
+    <string name="save_alarm">Alarme salvo!</string>
+    <string name="intent_action_alarm">br.com.luishenrique.alarmdevoz.INTENT_ACTION_ALARM</string>
+    <string name="create_alarm_fragment">CreateAlarmFragment</string>
+    <string name="home_fragment">HomeFragment</string>
+    <string name="create_alarm">criar alarme</string>
+    <string name="missing_title">O título não pode estar vazio!</string>
+    <string name="file_name_shared_preferences">br.com.luishenriquelab.alarmedevoz.sharedpreferences</string>
+    <string name="tomar_vitamina_d">Tomar vitamina D</string>
+    <string name="horario">09:00 AM</string>
+    <string name="error_message">Não foi possível carregar os alarmes!</string>
+    <string name="title_home">Seus alarmes</string>
 </resources>
