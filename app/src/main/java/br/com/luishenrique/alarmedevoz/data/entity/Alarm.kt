@@ -8,4 +8,13 @@ data class Alarm(
     val color: Int,
     val sound: String,
     val date: Date
-): Serializable
+): Serializable {
+    
+    fun equals(value: Alarm): Boolean {
+        return this.title == value.title
+                && this.color == value.color
+                && this.description == value.description
+                && this.sound == value.sound
+                && this.date == value.date
+    }
+}

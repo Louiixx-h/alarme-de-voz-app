@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit
 import android.app.AlarmManager as ServiceAlarmManager
 
 object AlarmManager {
-
     private const val milliSeconds: Long = 1000000
 
     @SuppressLint("ServiceCast")
@@ -27,9 +26,8 @@ object AlarmManager {
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
 
         calendar.timeInMillis = System.currentTimeMillis()
-        //calendar.set(Calendar.HOUR, alarm.date.hour)
-        //calendar.set(Calendar.SECOND, alarm.date.minute)
-        calendar.set(Calendar.SECOND, 5)
+        calendar.set(Calendar.HOUR, alarm.date.hour)
+        calendar.set(Calendar.SECOND, alarm.date.minute)
 
         if (pendingIntent == null || alarmManager == null) return
 

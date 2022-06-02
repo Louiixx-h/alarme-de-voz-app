@@ -2,14 +2,13 @@ package br.com.luishenrique.alarmedevoz.presenter.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.luishenrique.alarmedevoz.R
 import br.com.luishenrique.alarmedevoz.data.entity.Alarm
 import br.com.luishenrique.alarmedevoz.presenter.adapter.AlarmAdapterListener
 import br.com.luishenrique.alarmedevoz.presenter.adapter.AlarmListAdapter
-import br.com.luishenrique.alarmedevoz.presenter.viewmodel.HomeAlarmState
-import br.com.luishenrique.alarmedevoz.presenter.viewmodel.HomeViewModel
+import br.com.luishenrique.alarmedevoz.presenter.components.DialogFragment
+import br.com.luishenrique.alarmedevoz.presenter.viewmodel.AlarmCommand
 import br.com.luishenrique.alarmedevoz.presenter.viewmodel.IHomeViewModel
 import br.com.luishenrique.alarmedevoz.utils.toast
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -39,10 +38,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), AlarmAdapterListener {
     private fun setupObservables() {
         viewModel.state.observe(viewLifecycleOwner) {
             when(it) {
-                is HomeAlarmState.Success -> {
+                is AlarmCommand.ListAlarms -> {
                     setupView(it.value)
                 }
-                is HomeAlarmState.GenericError -> {
+                is AlarmCommand.DeleteAlarmSuccessful -> {
+                    displayAlarmDeleteMessage()
+                }
+                is AlarmCommand.GenericError -> {
                     showError()
                 }
             }
@@ -66,6 +68,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), AlarmAdapterListener {
         toast(getString(R.string.error_message))
     }
 
+    private fun displayAlarmDeleteMessage() {
+        toast(getString(R.string.alarm_delete_message))
+    }
+
     private fun goToCreateAlarm() {
         with(parentFragmentManager.beginTransaction()) {
             setCustomAnimations(R.anim.slide_in_up, R.anim.slide_in_out)
@@ -84,5 +90,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), AlarmAdapterListener {
 
     override fun onClick(alarm: Alarm) {
 
+    }
+
+    override fun onRemove(alarm: Alarm) {
+        DialogFragment.instance(getString(R.string.aviso_exlcuir_alarm), getString(R.string.alert)) {
+            viewModel.removeAlarm(alarm)
+        }.show(childFragmentManager, DialogFragment.TAG)
     }
 }

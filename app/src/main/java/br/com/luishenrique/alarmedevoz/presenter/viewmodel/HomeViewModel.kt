@@ -4,24 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.luishenrique.alarmedevoz.data.repository.IHomeAlarmRepository
+import br.com.luishenrique.alarmedevoz.data.entity.Alarm
+import br.com.luishenrique.alarmedevoz.data.repository.IAlarmRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeViewModel(
-    private val alarmHomeRepository: IHomeAlarmRepository
+    private val alarmHomeRepository: IAlarmRepository
 ) : ViewModel(), IHomeViewModel {
 
-    private val _state: MutableLiveData<HomeAlarmState> = MutableLiveData()
-    override val state: LiveData<HomeAlarmState> = _state
+    override val state: LiveData<AlarmCommand> = alarmHomeRepository.alarmLiveData
 
     override fun getAlarms() {
-        viewModelScope.launch {
-            val response = alarmHomeRepository.getAlarms()
-            response.run()
-        }
+        alarmHomeRepository.getAlarms()
     }
 
-    private fun HomeAlarmState.run() {
-        _state.postValue(this)
+    override fun removeAlarm(alarm: Alarm) {
+        alarmHomeRepository.removeAlarm(alarm)
     }
 }

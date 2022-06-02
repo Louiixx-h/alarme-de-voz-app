@@ -1,10 +1,10 @@
 package br.com.luishenrique.alarmedevoz.presenter.viewmodel
 
 import androidx.lifecycle.LiveData
+import br.com.luishenrique.alarmedevoz.data.entity.Alarm
 
 interface ICreateAlarmViewModel {
-
-    val state: LiveData<CreateAlarmState>
+    val state: LiveData<AlarmCommand>
 
     fun setSound(sound: String)
     fun setColor(color: Int)

@@ -13,4 +13,8 @@ class AlarmPersistenceProxy(
     override fun saveAlarm(value: Alarm) {
         alarmPersistenceProtocol.saveAlarm(value)
     }
+
+    override fun removeAlarm(value: Alarm) {
+        alarmPersistenceProtocol.removeAlarm(value)
+    }
 }

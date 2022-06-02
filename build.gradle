@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        mockk_version = "1.12.4"
+        koin_version = "3.2.0-beta-1"
+    }
+}
 
 plugins {
     id 'com.android.application' version '7.1.2' apply false

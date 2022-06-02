@@ -1,12 +1,10 @@
 package br.com.luishenrique.alarmedevoz.di
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import br.com.luishenrique.alarmedevoz.R
-import br.com.luishenrique.alarmedevoz.data.repository.CreateAlarmRepository
-import br.com.luishenrique.alarmedevoz.data.repository.HomeAlarmRepository
-import br.com.luishenrique.alarmedevoz.data.repository.ICreateAlarmRepository
-import br.com.luishenrique.alarmedevoz.data.repository.IHomeAlarmRepository
+import br.com.luishenrique.alarmedevoz.data.repository.AlarmRepository
+import br.com.luishenrique.alarmedevoz.data.repository.IAlarmRepository
 import br.com.luishenrique.alarmedevoz.data.service.persistence.AlarmPersistence
 import br.com.luishenrique.alarmedevoz.data.service.persistence.AlarmPersistenceProxy
 import br.com.luishenrique.alarmedevoz.presenter.viewmodel.CreateAlarmViewModel
@@ -29,8 +27,12 @@ val dataPersistenceModule = module {
 }
 
 val repositoryModule = module {
-    factory<ICreateAlarmRepository> { CreateAlarmRepository(get<AlarmPersistenceProxy>()) }
-    factory<IHomeAlarmRepository> { HomeAlarmRepository(get<AlarmPersistenceProxy>()) }
+    single<IAlarmRepository> {
+        AlarmRepository(
+            get<AlarmPersistenceProxy>(),
+            MutableLiveData()
+        )
+    }
 }
 
 val viewModelModule = module {

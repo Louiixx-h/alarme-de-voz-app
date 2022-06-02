@@ -4,21 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.luishenrique.alarmedevoz.data.repository.ICreateAlarmRepository
+import br.com.luishenrique.alarmedevoz.data.entity.Alarm
+import br.com.luishenrique.alarmedevoz.data.repository.IAlarmRepository
 import br.com.luishenrique.alarmedevoz.data.entity.AlarmRequest
 import br.com.luishenrique.alarmedevoz.data.entity.Date
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CreateAlarmViewModel(
-    private val createAlarmRepository: ICreateAlarmRepository
+    private val createAlarmRepository: IAlarmRepository
 ) : ViewModel(), ICreateAlarmViewModel {
 
     private val alarm: AlarmRequest = AlarmRequest()
 
-    private val _state: MutableLiveData<CreateAlarmState> = MutableLiveData()
-    override val state: LiveData<CreateAlarmState> = _state
+    private val _state: MutableLiveData<AlarmCommand> = MutableLiveData()
+    override val state: LiveData<AlarmCommand> = _state
 
     override fun setSound(sound: String) {
         alarm.sound = sound
@@ -37,8 +38,10 @@ class CreateAlarmViewModel(
 
     override fun saveAlarm() {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = async { createAlarmRepository.saveAlarm(alarm) }
-            _state.postValue(response.await())
+            withContext(Dispatchers.IO) {
+                val response: AlarmCommand = createAlarmRepository.saveAlarm(alarm)
+                _state.postValue(response)
+            }
         }
     }
 

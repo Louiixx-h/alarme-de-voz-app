@@ -19,4 +19,11 @@
     <string name="horario">09:00 AM</string>
     <string name="error_message">Não foi possível carregar os alarmes!</string>
     <string name="title_home">Seus alarmes</string>
+    <string name="remove_alarm">Remover alarme</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok">Confirmar</string>
+    <string name="aviso_exlcuir_alarm">Deseja excluir o alarm?</string>
+    <string name="alarm_delete_message">Alarme excluído com sucesso!</string>
+    <string name="alert">Alerta!</string>
 </resources>

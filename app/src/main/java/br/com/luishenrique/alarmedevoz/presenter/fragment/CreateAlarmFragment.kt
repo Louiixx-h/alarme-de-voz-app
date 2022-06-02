@@ -8,10 +8,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import br.com.luishenrique.alarmedevoz.R
 import br.com.luishenrique.alarmedevoz.data.service.alarmmanager.AlarmManager
-import br.com.luishenrique.alarmedevoz.data.service.broadcast.AlarmBroadcastReceiver
 import br.com.luishenrique.alarmedevoz.presenter.adapter.ColorAdapterListener
 import br.com.luishenrique.alarmedevoz.presenter.adapter.ColorListAdapter
-import br.com.luishenrique.alarmedevoz.presenter.viewmodel.CreateAlarmState
+import br.com.luishenrique.alarmedevoz.presenter.viewmodel.AlarmCommand
 import br.com.luishenrique.alarmedevoz.presenter.viewmodel.ICreateAlarmViewModel
 import kotlinx.android.synthetic.main.fragment_create_alarm.*
 import org.koin.android.ext.android.inject
@@ -54,25 +53,26 @@ class CreateAlarmFragment(
     private fun observable() {
         viewModel.state.observe(viewLifecycleOwner) {
             when(it) {
-                is CreateAlarmState.Success -> {
+                is AlarmCommand.CreatedNewAlarm -> {
                     AlarmManager.create(requireContext(), it.value)
                     goToHome()
                 }
-                is CreateAlarmState.MissingRepeatDay -> {
+                is AlarmCommand.MissingRepeatDay -> {
 
                 }
-                is CreateAlarmState.MissingTheSound -> {
+                is AlarmCommand.MissingTheSound -> {
 
                 }
-                is CreateAlarmState.MissingTheTitle -> {
+                is AlarmCommand.MissingTheTitle -> {
 
                 }
-                is CreateAlarmState.MissingTime -> {
+                is AlarmCommand.MissingTime -> {
 
                 }
-                is CreateAlarmState.GenericError -> {
+                is AlarmCommand.GenericError -> {
 
                 }
+                else -> {}
             }
         }
     }
